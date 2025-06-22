@@ -3,12 +3,48 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>California House Value Prediction</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <h1>Hello</h1>
+        <h1>California House Value Prediction</h1>
+
+        <form action="/predict_form" method="post">
+            <label for="MedInc">Median Income:</label>
+            <input type="text" id="MedInc" name="MedInc" required>
+            <br>
+            <label for="HouseAge">Housing Median Age:</label>
+            <input type="text" id="HouseAge" name="HouseAge" required>
+            <br>
+            <label for="AveRooms">Average Rooms:</label>
+            <input type="text" id="AveRooms" name="AveRooms" required>
+            <br>
+            <label for="AveBedrms">Average Bedrooms:</label>
+            <input type="text" id="AveBedrms" name="AveBedrms" required>
+            <br>
+            <label for="Population">Population:</label>
+            <input type="text" id="Population" name="Population" required>
+            <br>
+            <label for="AveOccup">Average Occupancy:</label>
+            <input type="text" id="AveOccup" name="AveOccup" required>
+            <br>
+            <label for="Latitude">Latitude:</label>
+            <input type="text" id="Latitude" name="Latitude" required>
+            <br>
+            <label for="Longitude">Longitude:</label>
+            <input type="text" id="Longitude" name="Longitude" required>
+            <br>
+            <button type="submit">Predict</button>
+        </form>
+
+        <br>
+        <br>
+
+        {% if prediction_text %}
+            <h2>{{ prediction_text }}</h2>
+    {% endif %}
+
     </body>
 </html>
