@@ -5,7 +5,7 @@ WORKDIR /app
 
 RUN pip install -r requirements.txt
 
-EXPOSE $PORT
+EXPOSE 5000
 
 # Change CMD to exec form
 CMD ["gunicorn", "--workers=4", "--bind", "0.0.0.0:$PORT", "app:app"]
