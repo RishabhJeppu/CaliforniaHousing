@@ -15,6 +15,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Install Heroku CLI
+        run: |
+          curl https://cli-assets.heroku.com/install.sh | sh
+
 
 ### ⬇ IMPORTANT PART ⬇ ###
 
