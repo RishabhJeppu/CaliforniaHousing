@@ -1,7 +1,7 @@
 # heroku.yml
 build:
   docker:
-    web: Dockerfile # Points to your Dockerfile for the 'web' process type
-release: null
+    web: Dockerfile
+
 run:
-  web: gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app # This overrides your Dockerfile's CMD
+  web: gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app
