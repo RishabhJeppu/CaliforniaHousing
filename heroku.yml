@@ -1,0 +1,10 @@
+# heroku.yml
+build:
+  docker:
+    web: Dockerfile # Points to your Dockerfile for the 'web' process type
+release:
+  # Optional: commands to run after a successful deploy but before traffic is routed
+  # command:
+  #   - python manage.py migrate # Example for Django/Flask with migrations
+run:
+  web: gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app # This overrides your Dockerfile's CMD
