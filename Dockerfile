@@ -1,11 +1,9 @@
 FROM python:3.7
 
-COPY . /app
 WORKDIR /app
+COPY . /app
 
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 5000
-
-# Change CMD to exec form
-CMD ["gunicorn", "--workers=4", "--bind", "0.0.0.0:$PORT", "app:app"]
+# This lets Heroku dynamically inject the correct port
+CMD exec uvicorn main:app --host 0.0.0.0 --port $PORT
