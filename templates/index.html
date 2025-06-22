@@ -4,47 +4,249 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>California House Value Prediction</title>
-        <meta name="description" content="">
+        <meta name="description" content="Predict California house values using machine learning">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                padding: 20px;
+                color: #333;
+            }
+
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                background: white;
+                border-radius: 15px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+            }
+
+            .header {
+                background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+                color: white;
+                padding: 30px;
+                text-align: center;
+            }
+
+            .header h1 {
+                font-size: 28px;
+                font-weight: 600;
+                margin-bottom: 10px;
+            }
+
+            .header p {
+                font-size: 16px;
+                opacity: 0.9;
+            }
+
+            .form-container {
+                padding: 40px;
+            }
+
+            .form-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                margin-bottom: 30px;
+            }
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .form-group.full-width {
+                grid-column: 1 / -1;
+            }
+
+            label {
+                font-weight: 600;
+                margin-bottom: 8px;
+                color: #555;
+                font-size: 14px;
+            }
+
+            input[type="text"], input[type="number"] {
+                padding: 12px 15px;
+                border: 2px solid #e1e8ed;
+                border-radius: 8px;
+                font-size: 16px;
+                transition: all 0.3s ease;
+                background: #f8f9fa;
+            }
+
+            input[type="text"]:focus, input[type="number"]:focus {
+                outline: none;
+                border-color: #667eea;
+                background: white;
+                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            }
+
+            .submit-btn {
+                width: 100%;
+                padding: 15px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                font-size: 18px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            .submit-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            }
+
+            .submit-btn:active {
+                transform: translateY(0);
+            }
+
+            .prediction-result {
+                margin-top: 30px;
+                padding: 20px;
+                background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+                border-radius: 8px;
+                text-align: center;
+                color: white;
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+            .info-section {
+                background: #f8f9fa;
+                padding: 20px;
+                margin-top: 20px;
+                border-radius: 8px;
+                border-left: 4px solid #667eea;
+            }
+
+            .info-section h3 {
+                color: #667eea;
+                margin-bottom: 10px;
+                font-size: 16px;
+            }
+
+            .info-section p {
+                color: #666;
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            @media (max-width: 768px) {
+                .form-grid {
+                    grid-template-columns: 1fr;
+                    gap: 15px;
+                }
+
+                .form-container {
+                    padding: 30px 20px;
+                }
+
+                .header h1 {
+                    font-size: 24px;
+                }
+
+                body {
+                    padding: 10px;
+                }
+            }
+
+            .input-hint {
+                font-size: 12px;
+                color: #888;
+                margin-top: 4px;
+                font-style: italic;
+            }
+
+            .required {
+                color: #ff6b6b;
+            }
+        </style>
     </head>
     <body>
-        <h1>California House Value Prediction</h1>
+        <div class="container">
+            <div class="header">
+                <h1>🏠 California House Value Prediction</h1>
+                <p>Get accurate house value predictions using advanced machine learning</p>
+            </div>
 
-        <form action="/predict_form" method="post">
-            <label for="MedInc">Median Income:</label>
-            <input type="text" id="MedInc" name="MedInc" required>
-            <br>
-            <label for="HouseAge">Housing Median Age:</label>
-            <input type="text" id="HouseAge" name="HouseAge" required>
-            <br>
-            <label for="AveRooms">Average Rooms:</label>
-            <input type="text" id="AveRooms" name="AveRooms" required>
-            <br>
-            <label for="AveBedrms">Average Bedrooms:</label>
-            <input type="text" id="AveBedrms" name="AveBedrms" required>
-            <br>
-            <label for="Population">Population:</label>
-            <input type="text" id="Population" name="Population" required>
-            <br>
-            <label for="AveOccup">Average Occupancy:</label>
-            <input type="text" id="AveOccup" name="AveOccup" required>
-            <br>
-            <label for="Latitude">Latitude:</label>
-            <input type="text" id="Latitude" name="Latitude" required>
-            <br>
-            <label for="Longitude">Longitude:</label>
-            <input type="text" id="Longitude" name="Longitude" required>
-            <br>
-            <button type="submit">Predict</button>
-        </form>
+            <div class="form-container">
+                <form action="/predict_form" method="post">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="MedInc">Median Income <span class="required">*</span></label>
+                            <input type="number" step="0.01" id="MedInc" name="MedInc" required placeholder="e.g., 8.32">
+                            <div class="input-hint">In tens of thousands of dollars</div>
+                        </div>
 
-        <br>
-        <br>
+                        <div class="form-group">
+                            <label for="HouseAge">Housing Median Age <span class="required">*</span></label>
+                            <input type="number" step="0.01" id="HouseAge" name="HouseAge" required placeholder="e.g., 41.0">
+                            <div class="input-hint">Median age of houses in years</div>
+                        </div>
 
-        {% if prediction_text %}
-            <h2>{{ prediction_text }}</h2>
-    {% endif %}
+                        <div class="form-group">
+                            <label for="AveRooms">Average Rooms <span class="required">*</span></label>
+                            <input type="number" step="0.01" id="AveRooms" name="AveRooms" required placeholder="e.g., 6.98">
+                            <div class="input-hint">Average number of rooms per household</div>
+                        </div>
 
+                        <div class="form-group">
+                            <label for="AveBedrms">Average Bedrooms <span class="required">*</span></label>
+                            <input type="number" step="0.01" id="AveBedrms" name="AveBedrms" required placeholder="e.g., 1.02">
+                            <div class="input-hint">Average number of bedrooms per household</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Population">Population <span class="required">*</span></label>
+                            <input type="number" id="Population" name="Population" required placeholder="e.g., 322">
+                            <div class="input-hint">Total population in the area</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="AveOccup">Average Occupancy <span class="required">*</span></label>
+                            <input type="number" step="0.01" id="AveOccup" name="AveOccup" required placeholder="e.g., 2.55">
+                            <div class="input-hint">Average household size</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Latitude">Latitude <span class="required">*</span></label>
+                            <input type="number" step="0.000001" id="Latitude" name="Latitude" required placeholder="e.g., 37.88">
+                            <div class="input-hint">Geographic latitude coordinate</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Longitude">Longitude <span class="required">*</span></label>
+                            <input type="number" step="0.000001" id="Longitude" name="Longitude" required placeholder="e.g., -122.23">
+                            <div class="input-hint">Geographic longitude coordinate</div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">🔮 Predict House Value</button>
+                </form>
+
+                <div class="info-section">
+                    <h3>💡 How it works</h3>
+                    <p>Our machine learning model analyzes various factors including location, demographics, and housing characteristics to provide accurate house value predictions for California properties.</p>
+                </div>
+                    <div class="prediction-result">
+                        <h2>{{ prediction_text }}</h2>
+                    </div>
+            </div>
+        </div>
     </body>
 </html>
